@@ -55,7 +55,7 @@ const Page = () => {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-              Your neighborhood job board
+              Chitwan Job Board
             </span>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
               Find Your Next Job{" "}
