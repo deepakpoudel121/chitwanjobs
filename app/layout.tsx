@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: 'Chitwan Jobs',
     images: [
       {
-        url: '/unnamed.png', // or use a specific og-image.png
+        url: '/unnamed.jpg', // or use a specific og-image.png
         width: 1200,
         height: 630,
         alt: 'Chitwan Jobs - Local Job Opportunities',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Chitwan Jobs - Find Your Dream Job in Chitwan",
     description: "Find your dream job in Chitwan, Nepal. Explore the latest job listings and career opportunities tailored for you.",
-    images: ['/unnamed.png'], // or use a specific twitter-image.png
+    images: ['/unnamed.jpg'], // or use a specific twitter-image.png
   },
   metadataBase: new URL('https://chitwanjobs.vercel.app'), // Replace with your actual domain
 };
