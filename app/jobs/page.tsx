@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -134,7 +134,8 @@ const mockJobs = [
   },
 ];
 
-const Jobs = () => {
+// Separate component that uses useSearchParams
+function JobsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category") || "all";
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
@@ -151,15 +152,13 @@ const Jobs = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-
+    <>
       {/* Page Header */}
       <section className="pt-28 pb-8 bg-secondary/30">
         <div className="container">
           <div className="max-w-2xl">
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-              Find Every Available Jobs In Chitwan
+              Find Local Jobs
             </h1>
             <p className="text-muted-foreground">
               Discover opportunities from businesses right in your neighborhood
@@ -210,7 +209,7 @@ const Jobs = () => {
                   variant={isActive ? "default" : "secondary"}
                   size="sm"
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`flex-shrink-0 ${isActive ? "" : "hover:bg-secondary/80"}`}
+                  className={`shrink ${isActive ? "" : "hover:bg-secondary/80"}`}
                 >
                   <Icon className="w-4 h-4 mr-2" />
                   {category.label}
@@ -274,7 +273,25 @@ const Jobs = () => {
           )}
         </div>
       </section>
+    </>
+  );
+}
 
+// Main component with Suspense boundary
+const Jobs = () => {
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading jobs...</p>
+          </div>
+        </div>
+      }>
+        <JobsContent />
+      </Suspense>
       <Footer />
     </div>
   );
